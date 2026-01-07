@@ -21,4 +21,6 @@ from PublicpriveApp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('temporal-trajectory-clustering/', views.temporal_trajectory_clustering, name='temporal_trajectory_clustering'),
+    path('school-ranking-by-score/', views.school_ranking_by_score, name='school_ranking_by_score'),
 ]
