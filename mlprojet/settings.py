@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'PublicpriveApp',
     'UserApp',
     'PerformanceApp',
+    'YassinApp',
 ]
 
 MIDDLEWARE = [
