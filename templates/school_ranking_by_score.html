@@ -434,9 +434,10 @@
                             <div class="score-value">{{ prediction|floatformat:1 }}</div>
                             <p>{{ percentile_message }}</p>
                             <div class="percentile-bar">
-                                <div class="percentile-fill" style="width: {{ percentile }}%;"></div>
+                                <div class="percentile-fill" id="percentileFill"></div>
                             </div>
                             <p><small>Your school is in the top {{ percentile_top }}% of schools in France</small></p>
+                            <script>document.getElementById('percentileFill').style.width = '{{ percentile }}%';</script>
                         </div>
                         {% endif %}
                         
