@@ -136,7 +136,7 @@ https://templatemo.com/tm-587-tiya-golf-club
                                 <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="schoolTypologyDropdown">
                                     <li><a class="dropdown-item" href="#">Classify by type/program (ULIS, SEGPA, GRETA)</a></li>
                                     <li><a class="dropdown-item" href="#">Public/private, primary/middle/high</a></li>
-                                    <li><a class="dropdown-item" href="#">Canteen, boarding availability</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'boardinplusifrules:boarding_prediction' %}">Canteen, boarding availability</a></li>
                                     <li><a class="dropdown-item" href="#">Program clustering</a></li>
                                 </ul>
                             </li>
@@ -163,7 +163,7 @@ https://templatemo.com/tm-587-tiya-golf-club
                                 <a class="nav-link dropdown-toggle" href="#" id="candidateAnalysisDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Candidate Analysis</a>
                                 <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="candidateAnalysisDropdown">
                                     <li><a class="dropdown-item" href="#">Candidate segmentation (profile, performance)</a></li>
-                                    <li><a class="dropdown-item" href="#">Discover "if-then" rules for significant associations</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'boardinplusifrules:association_rules' %}">Discover "if-then" rules for significant associations</a></li>
                                 </ul>
                             </li>
                         </ul>

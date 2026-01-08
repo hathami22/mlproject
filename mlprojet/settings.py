@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'PublicpriveApp',
     'UserApp',
+    'BoardinPlusIfRulesApp',
 ]
 
 MIDDLEWARE = [
