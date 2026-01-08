@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'UserApp',
     'CantineApp',
     'FormationApp',
+    'PerformanceApp',
+    'YassinApp',
 ]
 
 MIDDLEWARE = [
