@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'PublicpriveApp',
     'UserApp',
     'BoardinPlusIfRulesApp',
+    'CantineApp',
+    'FormationApp',
+    'PerformanceApp',
+    'YassinApp',
 ]
 
 MIDDLEWARE = [
