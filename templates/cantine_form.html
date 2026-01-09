@@ -61,6 +61,197 @@
       align-items: center;
       gap: 8px;
     }
+
+
+  /* --- RESULT CARD (modern) --- */
+  .result-card{
+    border-radius: 18px;
+    padding: 18px 18px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+    overflow: hidden;
+    position: relative;
+    animation: popIn .35s ease-out;
+  }
+  @keyframes popIn { from {transform: translateY(8px); opacity:0} to {transform: translateY(0); opacity:1} }
+
+  .result-card.success{
+    background: linear-gradient(135deg, rgba(129,178,154,0.18), rgba(255,255,255,0.85));
+    border-color: rgba(129,178,154,0.35);
+  }
+  .result-card.danger{
+    background: linear-gradient(135deg, rgba(231,76,60,0.10), rgba(255,255,255,0.88));
+    border-color: rgba(231,76,60,0.20);
+  }
+
+  .result-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .result-title{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    margin:0;
+    font-weight: 800;
+    letter-spacing: .2px;
+  }
+  .result-icon{
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 22px;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.70);
+  }
+
+  .result-badge{
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-weight: 800;
+    font-size: 13px;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.70);
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .result-sub{
+    margin:0;
+    color: rgba(0,0,0,0.65);
+    font-weight: 600;
+  }
+
+  .proba-wrap{
+    margin-top: 12px;
+    padding: 12px 12px;
+    border-radius: 14px;
+    border: 1px dashed rgba(0,0,0,0.10);
+    background: rgba(255,255,255,0.55);
+  }
+
+  .proba-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .proba-label{
+    font-weight: 800;
+  }
+  .proba-value{
+    font-weight: 900;
+    font-size: 18px;
+  }
+
+  .result-hint{
+    margin-top: 10px;
+    font-size: 13px;
+    color: rgba(0,0,0,0.58);
+    font-weight: 600;
+    display:flex;
+    align-items:flex-start;
+    gap: 8px;
+  }
+
+  .pred-card{
+  border-radius: 18px;
+  padding: 18px 18px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+}
+
+.pred-yes{
+  background: linear-gradient(135deg, rgba(129,178,154,0.18), rgba(255,255,255,1));
+  border-color: rgba(129,178,154,0.35);
+}
+
+.pred-no{
+  background: linear-gradient(135deg, rgba(230,57,70,0.12), rgba(255,255,255,1));
+  border-color: rgba(230,57,70,0.25);
+}
+
+.pred-top{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.pred-icon{
+  width:52px;
+  height:52px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(0,0,0,0.06);
+  font-size: 22px;
+}
+
+.pred-title{
+  flex:1;
+}
+
+.pred-chip{
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(61,64,91,0.08);
+  border: 1px solid rgba(61,64,91,0.12);
+  color:#3D405B;
+  font-weight:600;
+  white-space:nowrap;
+}
+
+.pred-label{ font-weight:600; color:#2f2f2f; }
+.pred-value{ font-weight:800; font-size:18px; color:#111; }
+
+.pred-bar{
+  position:relative;
+  width:100%;
+  height:12px;
+  border-radius:999px;
+  background: rgba(0,0,0,0.07);
+  overflow:hidden;
+  margin-top:10px;
+}
+
+.pred-bar-fill{
+  height:100%;
+  border-radius:999px;
+  background: linear-gradient(90deg, #3D405B, #81B29A);
+}
+
+.pred-threshold{
+  position:absolute;
+  left:50%;
+  top:-6px;
+  width:2px;
+  height:24px;
+  background: rgba(0,0,0,0.35);
+  border-radius:2px;
+}
+
+.pred-hint{
+  font-size: 13px;
+  color:#333;
+  background: rgba(255,255,255,0.65);
+  border: 1px dashed rgba(0,0,0,0.10);
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
+
   </style>
 </head>
 
@@ -92,7 +283,7 @@
             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="schoolTypologyDropdown">
               <li><a class="dropdown-item" href="{% url 'objective_yassin1' %}">Classify by type/program (ULIS, SEGPA, GRETA)</a></li>
               <li><a class="dropdown-item" href="#">Public/private, primary/middle/high</a></li>
-              <li><a class="dropdown-item" href="{% url 'boardinplusifrules:boarding_prediction' %}">Canteen, boarding availability</a></li>
+              <li><a class="dropdown-item" href="#">Canteen, boarding availability</a></li>
               <li><a class="dropdown-item" href="#">Program clustering</a></li>
               <li><a class="dropdown-item" href="{% url 'cantine:predict' %}">Canteen prediction (Cantine)</a></li>
               <li><a class="dropdown-item" href="{% url 'formation:predict' %}">Formation clustering (Objectif Formation)</a></li>
@@ -124,7 +315,7 @@
                data-bs-toggle="dropdown" aria-expanded="false">Candidate Analysis</a>
             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="candidateAnalysisDropdown">
               <li><a class="dropdown-item" href="#">Candidate segmentation (profile, performance)</a></li>
-              <li><a class="dropdown-item" href="{% url 'boardinplusifrules:association_rules' %}">Discover "if-then" rules for significant associations</a></li>
+              <li><a class="dropdown-item" href="#">Discover "if-then" rules for significant associations</a></li>
             </ul>
           </li>
 
@@ -146,13 +337,13 @@
       <div class="row">
         <div class="col-lg-7 col-12">
           <h2 class="text-white">Education Analytics Platform</h2>
-          <h1 class="text-white mb-3">Prediction : Service de restauration (Cantine)</h1>
+          <h1 class="text-white mb-3">Prediction: Canteen Service</h1>
           <p class="text-white mb-4">
-            Remplis les caractéristiques de l’établissement, puis lance la prédiction (KNN - Méthode A).
+            Fill in the school characteristics, then run the prediction (KNN - Method A).
           </p>
 
           <span class="badge-soft">
-            <i class="bi bi-cpu"></i> Modèle : KNN (Méthode A)
+            <i class="bi bi-cpu"></i>Model: KNN (Method A)
           </span>
         </div>
       </div>
@@ -171,15 +362,15 @@
 
         <div class="col-lg-10 col-12">
           <div class="form-card">
-            <h3 class="mb-4">Formulaire de prédiction</h3>
+            <h3 class="mb-4">Prediction Form</h3>
 
             <form method="post" class="row g-3">
               {% csrf_token %}
 
               <div class="col-md-4">
-                <label class="form-label">Type établissement</label>
+                <label class="form-label">School type</label>
                 <select class="form-select" name="type_etablissement" required>
-                  <option value="" disabled {% if not form.type_etablissement %}selected{% endif %}>Choisir...</option>
+                  <option value="" disabled {% if not form.type_etablissement %}selected{% endif %}>Choose...</option>
                   {% for opt in type_options %}
                     <option value="{{ opt }}" {% if form.type_etablissement == opt %}selected{% endif %}>{{ opt }}</option>
                   {% endfor %}
@@ -189,7 +380,7 @@
               <div class="col-md-4">
                 <label class="form-label">Statut</label>
                 <select class="form-select" name="statut_public_prive" required>
-                  <option value="" disabled {% if not form.statut_public_prive %}selected{% endif %}>Choisir...</option>
+                  <option value="" disabled {% if not form.statut_public_prive %}selected{% endif %}>Choose...</option>
                   {% for opt in statut_options %}
                     <option value="{{ opt }}" {% if form.statut_public_prive == opt %}selected{% endif %}>{{ opt }}</option>
                   {% endfor %}
@@ -197,9 +388,9 @@
               </div>
 
               <div class="col-md-4">
-                <label class="form-label">Région</label>
+                <label class="form-label">Region</label>
                 <select class="form-select" name="libelle_region" required>
-                  <option value="" disabled {% if not form.libelle_region %}selected{% endif %}>Choisir...</option>
+                  <option value="" disabled {% if not form.libelle_region %}selected{% endif %}>Choose...</option>
                   {% for opt in region_options %}
                     <option value="{{ opt }}" {% if form.libelle_region == opt %}selected{% endif %}>{{ opt }}</option>
                   {% endfor %}
@@ -219,7 +410,7 @@
 </div>
 
 <div class="col-md-4">
-  <label class="form-label">Nb étudiants région</label>
+  <label class="form-label">Nb students in region</label>
   <input type="number" step="any" class="form-control" name="nb_etudiants_region"
          value="{{ form.nb_etudiants_region|default:'' }}" required>
 </div> <!-- ✅ IMPORTANT : fermeture de col-md-4 -->
@@ -229,7 +420,7 @@
 </div>
 
 <div class="col-md-6">
-  <h5 class="mb-3">Services / indicateurs</h5>
+  <h5 class="mb-3">Services / indicators</h5>
 
   <div class="form-check mb-2">
     <input class="form-check-input" type="checkbox" name="de_ulis" {% if form.de_ulis %}checked{% endif %}>
@@ -253,69 +444,117 @@
 
   <div class="form-check mb-2">
     <input class="form-check-input" type="checkbox" name="de_hebergement" {% if form.de_hebergement %}checked{% endif %}>
-    <label class="form-check-label">Hébergement</label>
+    <label class="form-check-label">Boarding</label>
   </div>
 
   <div class="form-check mb-2">
     <input class="form-check-input" type="checkbox" name="APPARTENANCE_EDUCATION_PRIORITAITRE"
            {% if form.APPARTENANCE_EDUCATION_PRIORITAITRE %}checked{% endif %}>
-    <label class="form-check-label">Éducation prioritaire</label>
+    <label class="form-check-label">Priority education</label>
   </div>
 </div>
 
 <div class="col-md-6">
-  <h5 class="mb-3">Type (cases)</h5>
+  <h5 class="mb-3">Type (checkboxes)</h5>
 
   <div class="form-check mb-2">
     <input class="form-check-input" type="checkbox" name="ecole_elementaire" {% if form.ecole_elementaire %}checked{% endif %}>
-    <label class="form-check-label">École élémentaire</label>
+    <label class="form-check-label">Elementary school</label>
   </div>
 
   <div class="form-check mb-2">
     <input class="form-check-input" type="checkbox" name="ecole_maternelle" {% if form.ecole_maternelle %}checked{% endif %}>
-    <label class="form-check-label">École maternelle</label>
+    <label class="form-check-label">Kindergarten</label>
   </div>
 
   <div class="form-check mb-2">
     <input class="form-check-input" type="checkbox" name="lycee_agricole" {% if form.lycee_agricole %}checked{% endif %}>
-    <label class="form-check-label">Lycée agricole</label>
+    <label class="form-check-label">Agricultural high school</label>
   </div>
 
   <div class="form-check mb-2">
     <input class="form-check-input" type="checkbox" name="lycee_militaire" {% if form.lycee_militaire %}checked{% endif %}>
-    <label class="form-check-label">Lycée militaire</label>
+    <label class="form-check-label">Military high school</label>
   </div>
 
   <div class="form-check mb-2">
     <input class="form-check-input" type="checkbox" name="lycee_des_metiers" {% if form.lycee_des_metiers %}checked{% endif %}>
-    <label class="form-check-label">Lycée des métiers</label>
+    <label class="form-check-label">Vocational high school</label>
   </div>
 </div>
 
 <div class="col-12 mt-3">
   <button type="submit" class="btn custom-btn w-100">
-    <i class="bi bi-lightning-charge-fill me-2"></i> Prédire
+    <i class="bi bi-lightning-charge-fill me-2"></i> Predict
   </button>
 </div>
 
 
             </form>
 
-            {% if result != None %}
-              <div class="mt-4 result-box">
-                <h5 class="mb-2">Résultat</h5>
+           {% if result != None %}
+              <div class="mt-4 pred-card {% if result == 1 %}pred-yes{% else %}pred-no{% endif %}">
+                <div class="pred-top">
+                  <div class="pred-icon">
+                    {% if result == 1 %}🍽️{% else %}🚫🍽️{% endif %}
+                  </div>
 
-                {% if result == 1 %}
-                  <p class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Cantine disponible</strong> (de_restauration = 1)</p>
-                {% else %}
-                  <p class="mb-2"><i class="bi bi-x-circle-fill text-danger me-2"></i><strong>Pas de cantine</strong> (de_restauration = 0)</p>
-                {% endif %}
+                  <div class="pred-title">
+                    <h4 class="mb-1">
+                      {% if result == 1 %}Canteen available{% else %}No canteen{% endif %}
+                    </h4>
+                    <p class="mb-0">
+                      {% if proba != None %}
+                        The model estimates a <strong>{{ proba|floatformat:3 }}</strong> 😊 <strong>{{ proba|floatformat:3 }} × 100%</strong>) chance of having a canteen.
+                      {% else %}
+                        Prediction completed.
+                      {% endif %}
+                    </p>
+                  </div>
+
+                  <span class="pred-chip">
+                    {% if result == 1 %}de_restauration = 1{% else %}de_restauration = 0{% endif %}
+                  </span>
+                </div>
 
                 {% if proba != None %}
-                  <p class="mb-0">Probabilité (classe 1) : <strong>{{ proba|floatformat:3 }}</strong></p>
+                  {% with p=proba %}
+                    <div class="pred-mid mt-3">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="pred-label">Probability of having a canteen (class 1)</span>
+                        <span class="pred-value">{{ p|floatformat:3 }}</span>
+                      </div>
+
+                      <div class="pred-bar">
+                        <div class="pred-bar-fill" style="width: calc({{ p|floatformat:3 }} * 100%);"></div>
+                        <div class="pred-threshold" title="Threshold 0.50"></div>
+                      </div>
+
+                      <div class="pred-hint mt-2">
+                        <strong>Decision:</strong>
+                        {% if p >= 0.5 %}
+                          Canteen (because {{ p|floatformat:3 }} ≥ 0.50)
+                        {% else %}
+                          No canteen (because {{ p|floatformat:3 }} < 0.50)
+                        {% endif %}
+                        <span class="ms-2">
+                          • <strong>Confidence:</strong>
+                          {% if p >= 0.75 or p <= 0.25 %}
+                            High
+                          {% elif p >= 0.60 or p <= 0.40 %}
+                            Medium
+                          {% else %}
+                            Low
+                          {% endif %}
+                        </span>
+                      </div>
+                    </div>
+                  {% endwith %}
                 {% endif %}
               </div>
             {% endif %}
+
+
 
           </div>
         </div>
