@@ -1,4 +1,2 @@
-PublicpriveApp/data/cluster_0.xls filter=lfs diff=lfs merge=lfs -text
-clustered_data.csv filter=lfs diff=lfs merge=lfs -text
 *.xls filter=lfs diff=lfs merge=lfs -text
 *.csv filter=lfs diff=lfs merge=lfs -text
