@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'FormationApp',
     'PerformanceApp',
     'YassinApp',
+    'ferdws_type',
+    'ferdws_cluster',
 ]
 
 MIDDLEWARE = [

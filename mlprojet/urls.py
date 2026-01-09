@@ -35,4 +35,6 @@ urlpatterns = [
     path('api/run_prediction_yassin2/', viewsyassin.run_prediction_yassin2, name='run_prediction_yassin2'),
     path('temporal-trajectory-clustering/', performance_views.temporal_trajectory_clustering, name='temporal_trajectory_clustering'),
     path('school-ranking-by-score/', performance_views.school_ranking_by_score, name='school_ranking_by_score'),
+    path('ferdws_cluster/',include('ferdws_cluster.urls')),
+    path('ferdws_type/', include('ferdws_type.urls')),
 ]
