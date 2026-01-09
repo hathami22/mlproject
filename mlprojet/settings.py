@@ -68,6 +68,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'PublicpriveApp',
     'UserApp',
+    'BoardinPlusIfRulesApp',
+    'CantineApp',
+    'FormationApp',
+    'PerformanceApp',
+    'YassinApp',
 ]
 
 MIDDLEWARE = [

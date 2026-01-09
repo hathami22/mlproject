@@ -68,3 +68,7 @@ celerybeat.pid
 # Django migrations (keep the folder structure, ignore cache)
 */migrations/__pycache__/
 
+
+
+
+
