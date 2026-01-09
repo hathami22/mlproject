@@ -17,12 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from PublicpriveApp import views
-
+from RiskApp import views
+from PerformanceApp import views as performance_views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('temporal-trajectory-clustering/', views.temporal_trajectory_clustering, name='temporal_trajectory_clustering'),
-    path('school-ranking-by-score/', views.school_ranking_by_score, name='school_ranking_by_score'),
+    path('', performance_views.home, name='home'),
+    path('temporal-trajectory-clustering/', performance_views.temporal_trajectory_clustering, name='temporal_trajectory_clustering'),
+    path('school-ranking-by-score/', performance_views.school_ranking_by_score, name='school_ranking_by_score'),
     path('cantine/', include('CantineApp.urls')),
-    path('formation/', include('FormationApp.urls')), 
+    path('formation/', include('FormationApp.urls')),
+    path('risk/',views.predict_sport_risk,name='risk'),
 ]
