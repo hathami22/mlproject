@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path, include
-<<<<<<< HEAD
 from PublicpriveApp.views import home
 
 urlpatterns = [
@@ -10,7 +9,6 @@ urlpatterns = [
 
 
 ]
-=======
 from PublicpriveApp import views as public_views
 from YassinApp import views as viewsyassin
 from PerformanceApp import views as performance_views
@@ -23,7 +21,8 @@ urlpatterns = [
     path('ml/', include('BoardinPlusIfRulesApp.urls')),
     path('ObjectiveYassin2/', viewsyassin.objective_yassin2, name='objective_yassin2'),
     path('ObjectiveYassin1/', viewsyassin.objective_yassin1, name='objective_yassin1'),
-    
+    path('', include('PublicpriveApp.urls')),    # inclut /predict/
+
     path('api/extract_csv_data/', viewsyassin.extract_csv_data, name='extract_csv_data'),
     path('api/run_prediction/', viewsyassin.run_prediction, name='run_prediction'),
     path('api/extract_csv_data_yassin2/', viewsyassin.extract_csv_data_yassin2, name='extract_csv_data_yassin2'),
@@ -31,4 +30,3 @@ urlpatterns = [
     path('temporal-trajectory-clustering/', performance_views.temporal_trajectory_clustering, name='temporal_trajectory_clustering'),
     path('school-ranking-by-score/', performance_views.school_ranking_by_score, name='school_ranking_by_score'),
 ]
->>>>>>> 9ef9f9ddeb2b385dbf6e18dfa86df9c1f9db4ab6
