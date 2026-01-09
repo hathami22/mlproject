@@ -15,7 +15,36 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Power BI iframe support
 
+X_FRAME_OPTIONS = "SAMEORIGIN"
+
+# CSP (django-csp)
+CSP_FRAME_SRC = [
+    "'self'",
+    "https://app.powerbi.com",
+]
+
+CSP_CONNECT_SRC = [
+    "'self'",
+    "https://app.powerbi.com",
+    "https://*.powerbi.com",
+]
+
+# CSRF (required only if Power BI posts back – safe to include)
+CSRF_TRUSTED_ORIGINS = [
+    "https://app.powerbi.com",
+]
+
+# CORS (ONLY if you use django-cors-headers)
+CORS_ALLOWED_ORIGINS = [
+    "https://app.powerbi.com",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+# Required to avoid iframe isolation issues
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
