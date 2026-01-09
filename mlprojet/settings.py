@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'PublicpriveApp',
     'UserApp',
+    'ferdws_type',
+    'ferdws_cluster',
 ]
 
 MIDDLEWARE = [
