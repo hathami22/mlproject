@@ -8,7 +8,6 @@ from django.conf import settings
 
 # Create your views here.
 
-
 def temporal_trajectory_clustering(request):
     """
     View for temporal trajectory clustering prediction.
@@ -224,4 +223,8 @@ def school_ranking_by_score(request):
         except Exception as e:
             context['error'] = f'An error occurred during prediction: {str(e)}'
     
+<<<<<<< HEAD
     return render(request, 'school_ranking_by_score.html', context)
+=======
+    return render(request, 'school_ranking_by_score.html', context)
+>>>>>>> origin/anas

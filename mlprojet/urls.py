@@ -37,4 +37,5 @@ urlpatterns = [
     path('school-ranking-by-score/', performance_views.school_ranking_by_score, name='school_ranking_by_score'),
     path('ferdws_cluster/',include('ferdws_cluster.urls')),
     path('ferdws_type/', include('ferdws_type.urls')),
+    path('risk/',views.predict_sport_risk,name='risk'),
 ]
