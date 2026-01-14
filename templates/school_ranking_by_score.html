@@ -115,13 +115,22 @@
                data-bs-toggle="dropdown" aria-expanded="false">School Typology</a>
             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="schoolTypologyDropdown">
               <li><a class="dropdown-item" href="{% url 'objective_yassin1' %}">Classify by type/program (ULIS, SEGPA, GRETA)</a></li>
-              <li><a class="dropdown-item" href="#">Public/private, primary/middle/high</a></li>
+              <li><a class="dropdown-item" href="#">Public/private</a></li>
+              <li><a class="dropdown-item" href="{% url 'predict' %}"> primary/middle/high</a></li>
               <li><a class="dropdown-item" href="#">Canteen, boarding availability</a></li>
               <li><a class="dropdown-item" href="#">Program clustering</a></li>
               <li><a class="dropdown-item" href="{% url 'cantine:predict' %}">Canteen prediction (Cantine)</a></li>
               <li><a class="dropdown-item" href="{% url 'formation:predict' %}">Formation clustering (Objectif Formation)</a></li>
             </ul>
           </li>
+          <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="geographicAnalysisDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Geographic Analysis</a>
+                                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="geographicAnalysisDropdown">
+                                    <li><a class="dropdown-item" href="#">Cluster by region and performance</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'risk' %}">Detect regions at risk of too few schools</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'ferdws_cluster' %}">Academy-level clustering</a></li>
+                                </ul>
+                            </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="geographicAnalysisDropdown" role="button"
@@ -129,7 +138,7 @@
             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="geographicAnalysisDropdown">
               <li><a class="dropdown-item" href="{% url 'objective_yassin2' %}">Cluster by region and performance</a></li>
               <li><a class="dropdown-item" href="#">Detect regions at risk of too few schools</a></li>
-              <li><a class="dropdown-item" href="#">Academy-level clustering</a></li>
+              <li><a class="dropdown-item" href="{% url 'ferdws_cluster' %}">Academy-level clustering</a></li>
             </ul>
           </li>
 

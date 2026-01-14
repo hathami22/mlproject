@@ -9,4 +9,3 @@ urlpatterns = [
     path('association-rules/', views.association_rules_view, name='association_rules'),
     path('api/predict-cluster/', views.predict_cluster_api, name='predict_cluster_api'),
 ]
-

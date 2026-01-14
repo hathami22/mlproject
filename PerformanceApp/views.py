@@ -8,7 +8,6 @@ from django.conf import settings
 
 # Create your views here.
 
-
 def temporal_trajectory_clustering(request):
     """
     View for temporal trajectory clustering prediction.

@@ -459,81 +459,78 @@ def run_prediction_yassin2(request):
         # Check if model is HDBSCAN (unsupervised clustering)
         if best_model_type == 'HDBSCAN':
             # HDBSCAN model - unsupervised clustering
-            prediction = None
+            # Simple approach: find closest cluster based on training data centroids
+            prediction = -1.0
             num_clusters = 0
             error_msg = None
-            debug_info = {
-                'input_df_shape': str(input_df.shape),
-                'input_df_values': input_df.values.tolist(),
-                'input_scaled_shape': str(input_scaled.shape),
-                'input_scaled_values': input_scaled.tolist(),
-                'model_type': type(model).__name__
-            }
-            
-            # Print debug info to console
-            print("\n" + "="*60)
-            print("DEBUG INFO - HDBSCAN PREDICTION")
-            print("="*60)
-            print(f"Input DF Shape: {debug_info['input_df_shape']}")
-            print(f"Input DF Values: {debug_info['input_df_values']}")
-            print(f"Input Scaled Shape: {debug_info['input_scaled_shape']}")
-            print(f"Input Scaled Values: {debug_info['input_scaled_values']}")
-            print(f"Model Type: {debug_info['model_type']}")
-            print(f"Model Methods: {[m for m in dir(model) if 'predict' in m.lower() or 'label' in m.lower()]}")
-            print("="*60 + "\n")
             
             try:
-                # HDBSCAN doesn't have predict() for new points
-                # Instead, use the model's clustering labels and return a statistic
-                if hasattr(model, 'labels_'):
-                    print("Using model.labels_ (training data cluster assignments)...")
-                    labels = model.labels_
-                    # Get cluster statistics
-                    unique_clusters = np.unique(labels[labels != -1])  # -1 is noise
-                    num_clusters = len(unique_clusters)
-                    prediction = float(np.mean(labels[labels != -1])) if len(labels[labels != -1]) > 0 else 0.0
-                    print(f"Number of clusters: {num_clusters}")
-                    print(f"Cluster mean: {prediction}")
-                    
-                elif hasattr(model, 'fit_predict'):
-                    print("Using fit_predict (will refit model)...")
-                    print("WARNING: fit_predict will refit the model on new data")
-                    # This retrains the model, not ideal but works
-                    # prediction_result = model.fit_predict(input_scaled)
-                    # Instead, return a scaled average of the input
-                    prediction = float(np.mean(input_scaled))
-                    num_clusters = 0
-                    print(f"Mean of scaled input: {prediction}")
-                    
+                print("\n" + "="*60)
+                print("HDBSCAN CLUSTERING PREDICTION")
+                print("="*60)
+                
+                if not hasattr(model, 'labels_'):
+                    raise ValueError("Model doesn't have labels_ attribute")
+                
+                labels = model.labels_
+                unique_clusters = np.unique(labels[labels != -1])  # -1 is noise
+                num_clusters = len(unique_clusters)
+                print(f"Found {num_clusters} clusters")
+                
+                if num_clusters == 0:
+                    print("No valid clusters found")
+                    prediction = -1.0
                 else:
-                    # Fallback: return a normalized average of input data
-                    print("No cluster methods available, using input mean...")
-                    prediction = float(np.mean(input_scaled))
-                    num_clusters = 0
-                    print(f"Mean of scaled input: {prediction}")
+                    # Load training data
+                    models_dir = os.path.dirname(model_path)
+                    data_file = os.path.join(models_dir, 'df_encoded.csv')
                     
+                    if not os.path.exists(data_file):
+                        raise FileNotFoundError(f"df_encoded.csv not found at {data_file}")
+                    
+                    print(f"Loading training data...")
+                    X_full = pd.read_csv(data_file)[required_features]
+                    print(f"Full dataset shape: {X_full.shape}")
+                    
+                    # Use first 100,000 rows to calculate cluster centroids (original training data)
+                    n_train_samples = len(labels)
+                    X_train = X_full.iloc[:n_train_samples]
+                    print(f"Using first {n_train_samples} rows as training data for centroids")
+                    
+                    # Verify labels match
+                    if len(labels) != len(X_train):
+                        raise ValueError(f"Labels ({len(labels)}) don't match training data ({len(X_train)})")
+                    
+                    # Scale training data
+                    X_train_scaled = scaler.transform(X_train)
+                    
+                    # Calculate centroids
+                    centroids = {}
+                    for cid in unique_clusters:
+                        mask = labels == cid
+                        centroids[cid] = np.mean(X_train_scaled[mask], axis=0)
+                    
+                    # Find closest cluster
+                    input_point = input_scaled[0]
+                    distances = {cid: np.linalg.norm(input_point - cent) for cid, cent in centroids.items()}
+                    
+                    print(f"Distances: {distances}")
+                    prediction = float(min(distances, key=distances.get))
+                    print(f"Predicted cluster: {prediction}")
+                        
             except Exception as e:
-                error_msg = f"Clustering analysis error: {str(e)}"
-                print(f"EXCEPTION: {error_msg}")
+                error_msg = str(e)
+                print(f"ERROR: {error_msg}")
                 import traceback
                 traceback.print_exc()
-                prediction = float(np.mean(input_scaled)) if len(input_scaled) > 0 else 0.0
-                debug_info['exception'] = str(e)
+                prediction = -1.0
             
-            # Handle NaN predictions
-            if prediction is not None and (np.isnan(prediction) or np.isinf(prediction)):
-                error_msg = f"Prediction calculation resulted in NaN/Inf"
-                print(f"NaN/Inf DETECTED: {error_msg}")
-                prediction = 0.0
-            
-            # Build confidence scores based on best score from JSON
-            best_score = model_config.get('best_score', 0.0)
+            # Build response
             confidence = {
-                'model_accuracy': best_score,
-                'cluster_prediction': prediction if prediction is not None else 0.0,
+                'model_accuracy': model_config.get('best_score', 0.0),
+                'cluster_prediction': prediction,
                 'number_of_clusters': num_clusters
             }
-            
             if error_msg:
                 confidence['debug_error'] = error_msg
                 
